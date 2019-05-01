@@ -58,21 +58,24 @@ function start() {
             ])
             .then(function (anwser) {
                 var chosenItem;
-                console.log(anwser.amount)
+                
+                
                var checkItem = anwser.choice.replace(/ *\([^)]*\) */g, "");
         for (var i = 0; i < results.length; i++) {
             if (results[i].product_name === checkItem) {
               chosenItem = results[i];
+
+              
             
             }
         }
-
+           var amount = chosenItem.stock_quantity 
         if(chosenItem.stock_quantity >= parseInt(anwser.amount)) {
             connection.query(
                 "UPDATE products SET ? WHERE ?",
                 [
                   {
-                    stock_quantity:  -- anwser.amount
+                    stock_quantity:  amount-anwser.amount
                   },
                   {
                     product_name: chosenItem.product_name
@@ -80,7 +83,7 @@ function start() {
                 ],
                 function(error) {
                   if (error) throw err;
-                  
+                  console.log("Your Total is:$" + anwser.amount * chosenItem.price)
                   console.log(chosenItem.product_name + " bought succesfully, redirecting you back to product list");
                start()
                 }
