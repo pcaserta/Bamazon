@@ -80,10 +80,10 @@ function start() {
                 function(error) {
                   if (error) throw err;
                   console.log("\n---------------------------------------------------\n");
-                  console.log("Your Total Is:$" + anwser.amount * chosenItem.price)
+                  console.log("Your Total Is: $" + anwser.amount * chosenItem.price)
                   console.log(chosenItem.product_name + " bought succesfully");
                   console.log("\n---------------------------------------------------\n");
-               
+                  connection.end();
                 }
               );
         }
@@ -91,7 +91,7 @@ function start() {
             console.log("\n---------------------------------------------------\n");
             console.log("Sorry we are out of stock");
             console.log("\n---------------------------------------------------\n");
-          
+            connection.end();
         }
             });
     });
