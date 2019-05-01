@@ -57,15 +57,11 @@ function start() {
                 }
             ])
             .then(function (anwser) {
-                var chosenItem;
-                
-                
+                var chosenItem; 
                var checkItem = anwser.choice.replace(/ *\([^)]*\) */g, "");
         for (var i = 0; i < results.length; i++) {
             if (results[i].product_name === checkItem) {
               chosenItem = results[i];
-
-              
             
             }
         }
@@ -83,15 +79,19 @@ function start() {
                 ],
                 function(error) {
                   if (error) throw err;
-                  console.log("Your Total is:$" + anwser.amount * chosenItem.price)
-                  console.log(chosenItem.product_name + " bought succesfully, redirecting you back to product list");
-               start()
+                  console.log("\n---------------------------------------------------\n");
+                  console.log("Your Total Is:$" + anwser.amount * chosenItem.price)
+                  console.log(chosenItem.product_name + " bought succesfully");
+                  console.log("\n---------------------------------------------------\n");
+               
                 }
               );
         }
         else{
+            console.log("\n---------------------------------------------------\n");
             console.log("Sorry we are out of stock");
-            start()
+            console.log("\n---------------------------------------------------\n");
+          
         }
             });
     });
