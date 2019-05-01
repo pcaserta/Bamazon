@@ -6,7 +6,7 @@ var inquirer = require("inquirer");
 var connection = mysql.createConnection({
     host: "localhost",
 
-    // Your port; if not 3306
+    // port that we are using
     port: 3306,
 
     // Your username
@@ -25,10 +25,10 @@ connection.connect(function (err) {
 });
 
 function start() {
-    // query the database for all items being auctioned
+    // query the database for all products for sale
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
-        // once you have the items, prompt the user for which they'd like to bid on
+        // once you have the items, prompt the user for which product they want to buy
         inquirer
             .prompt([
                 {
@@ -56,6 +56,7 @@ function start() {
                     }
                 }
             ])
+            //get info about chosen item
             .then(function (anwser) {
                 var chosenItem; 
                var checkItem = anwser.choice.replace(/ *\([^)]*\) */g, "");
@@ -65,6 +66,7 @@ function start() {
             
             }
         }
+        //check the stock to make sure we can fullfill the order
            var amount = chosenItem.stock_quantity 
         if(chosenItem.stock_quantity >= parseInt(anwser.amount)) {
             connection.query(
@@ -77,6 +79,7 @@ function start() {
                     product_name: chosenItem.product_name
                   }
                 ],
+                //total the final order and let user know they succesfully bought item
                 function(error) {
                   if (error) throw err;
                   console.log("\n---------------------------------------------------\n");
@@ -87,6 +90,7 @@ function start() {
                 }
               );
         }
+        //lets the user know we are out of stock
         else{
             console.log("\n---------------------------------------------------\n");
             console.log("Sorry we are out of stock");
