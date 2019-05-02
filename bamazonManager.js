@@ -79,9 +79,9 @@ function lowInventory(){
 
 //function that allows user to add products to database
 
-
+// function to handle posting new items up for auction
 function addProduct() {
-    // prompt for info about the item that user wants to sell
+    // prompt for info about the item being put up for auction
     inquirer
       .prompt([
         {
@@ -124,7 +124,7 @@ function addProduct() {
           function(err) {
             if (err) throw err;
             console.log("Your auction was created successfully!");
-         
+            // re-prompt the user for if they want to bid or post
             connection.end();
           }
         );

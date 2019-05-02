@@ -57,9 +57,9 @@ function start() {
                 }
             ])
             //get info about chosen item
-            .then(function (anwser) {
+            .then(function (answer) {
                 var chosenItem; 
-               var checkItem = anwser.choice.replace(/ *\([^)]*\) */g, "");
+               var checkItem = answer.choice.replace(/ *\([^)]*\) */g, "");
         for (var i = 0; i < results.length; i++) {
             if (results[i].product_name === checkItem) {
               chosenItem = results[i];
@@ -68,7 +68,7 @@ function start() {
         }
         //check the stock to make sure we can fullfill the order
            var amount = chosenItem.stock_quantity 
-        if(chosenItem.stock_quantity >= parseInt(anwser.amount)) {
+        if(chosenItem.stock_quantity >= parseInt(answer.amount)) {
             connection.query(
                 "UPDATE products SET ? WHERE ?",
                 [
@@ -83,7 +83,7 @@ function start() {
                 function(error) {
                   if (error) throw err;
                   console.log("\n---------------------------------------------------\n");
-                  console.log("Your Total Is: $" + anwser.amount * chosenItem.price)
+                  console.log("Your Total Is: $" + answer.amount * chosenItem.price)
                   console.log(chosenItem.product_name + " bought succesfully");
                   console.log("\n---------------------------------------------------\n");
                   connection.end();
