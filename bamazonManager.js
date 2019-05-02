@@ -36,18 +36,30 @@ function start() {
         })
         .then(function (answer) {
             // based on their answer, either call the bid or the post functions
-            if (answer.MenuOptions === "View products for sale") {
+            if (answer.menuOptions === "View products for sale") {
+                console.log("ayy")
                 viewProducts();
-            }
-            else if (answer.MenuOptions === "View low inventory") {
+            }else if (answer.menuOptions === "View low inventory") {
                 lowInventory();
-            } else if (answer.MenuOptions === "Add to inventory") {
+            }else if (answer.menuOptions === "Add to inventory") {
                 addInventory()
-            }else if (answer.MenuOptions === "Add new product") {
+            }else if (answer.menuOptions === "Add new product") {
                 addProduct()
-            }
-            else {
+            }else {
                 connection.end();
             }
         });
+}
+
+function viewProducts() {
+    connection.query("SELECT * FROM products", function(err, res) {
+        if (err) throw err;
+     
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i].item_id + " | "  + res[i].product_name + " | " + "$"+ res[i].price + " | " +"quantity: " + res[i].stock_quantity);
+          }
+            
+
+        
+    });
 }
