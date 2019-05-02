@@ -50,7 +50,7 @@ function start() {
             }
         });
 }
-
+//allows user to display all products listed
 function viewProducts() {
     connection.query("SELECT * FROM products", function(err, res) {
         if (err) throw err;
@@ -64,9 +64,9 @@ function viewProducts() {
         
     });
 }
-
+//function that displays items with a stock_quantity < 5
 function lowInventory(){
-    
+    //query products where stock_quantity < 5
     connection.query("SELECT * FROM products Where stock_quantity < 5", function(err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
@@ -76,3 +76,57 @@ function lowInventory(){
           connection.end();
       });  
 }
+
+//function that allows user to add products to database
+
+// function to handle posting new items up for auction
+function addInventory() {
+    // prompt for info about the item being put up for auction
+    inquirer
+      .prompt([
+        {
+          name: "item",
+          type: "input",
+          message: "What is the item you would like to submit?"
+        },
+        {
+          name: "department",
+          type: "input",
+          message: "What department would you like to place your item in?"
+        },
+        {
+          name: "price",
+          type: "input",
+          message: "What price would you like to sell your item for?",
+          validate: function(value) {
+            if (isNaN(value) === false) {
+              return true;
+            }
+            return false;
+          }
+        },
+        {
+            name: "stock",
+            type: "input",
+            message: "How many do you want to sell?"
+        }
+      ])
+      .then(function(answer) {
+        // when finished prompting, insert a new item into the db with that info
+        connection.query(
+          "INSERT INTO products SET ?",
+          {
+            product_name: answer.item,
+            department_name: answer.department,
+            price: answer.price,
+            stock_quantity: answer.stock || 1
+          },
+          function(err) {
+            if (err) throw err;
+            console.log("Your auction was created successfully!");
+            // re-prompt the user for if they want to bid or post
+            connection.end();
+          }
+        );
+      });
+  }
