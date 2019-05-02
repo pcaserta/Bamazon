@@ -78,10 +78,8 @@ function lowInventory(){
 }
 
 //function that allows user to add products to database
-
-// function to handle posting new items up for auction
 function addProduct() {
-    // prompt for info about the item being put up for auction
+    // prompt for info about the item being added
     inquirer
       .prompt([
         {

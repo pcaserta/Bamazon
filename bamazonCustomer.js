@@ -73,7 +73,7 @@ function start() {
                 "UPDATE products SET ? WHERE ?",
                 [
                   {
-                    stock_quantity:  amount-anwser.amount
+                    stock_quantity:  amount-answer.amount
                   },
                   {
                     product_name: chosenItem.product_name
