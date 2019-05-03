@@ -128,3 +128,80 @@ function addProduct() {
         );
       });
   }
+
+ 
+
+    
+function addInventory() {
+  // query the database for all products for sale
+  connection.query("SELECT * FROM products", function (err, results) {
+      if (err) throw err;
+      // once you have the items, prompt the user for which product they want to buy
+      inquirer
+          .prompt([
+              {
+                  name: "choice",
+                  type: "rawlist",
+                  choices: function () {
+                      var choiceArray = [];
+                      for (var i = 0; i < results.length; i++) {
+                          choiceArray.push(results[i].product_name + " ($" + results[i].price + ")");
+                      }
+                      return choiceArray;
+
+                  },
+                  message: "What item would you like to add to?"
+              },
+              {
+                  name: "amount",
+                  type: "input",
+                  message: "How many would you like to add?",
+                  validate: function (value) {
+                      if (isNaN(value) === false) {
+                          return true;
+                      }
+                      return false;
+                  }
+              }
+          ])
+          //get info about chosen item
+          .then(function (answer) {
+              var chosenItem; 
+             var checkItem = answer.choice.replace(/ *\([^)]*\) */g, "");
+      for (var i = 0; i < results.length; i++) {
+          if (results[i].product_name === checkItem) {
+            chosenItem = results[i];
+          
+          }
+      }
+      //check the stock to make sure we can fullfill the order
+         var amount = chosenItem.stock_quantity 
+      
+          connection.query(
+              "UPDATE products SET ? WHERE ?",
+              [
+                {
+                  stock_quantity:  amount+parseInt(answer.amount)
+                },
+                {
+                  product_name: chosenItem.product_name
+                }
+              ],
+              
+              //total the final order and let user know they succesfully bought item
+              function(error) {
+                if (error) throw err;
+                console.log("\n---------------------------------------------------\n");
+              
+                console.log(chosenItem.product_name + " added succesfully");
+                console.log("\n---------------------------------------------------\n");
+                connection.end();
+              }
+            );
+      
+      //lets the user know we are out of stock
+      
+          });
+  });
+};
+
