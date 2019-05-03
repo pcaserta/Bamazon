@@ -43,13 +43,13 @@ Add To Inventory
 Add New Products
  
 
-<img width="1230" alt="screenshot" src="images/add_product.PNG">
+<img width="1230" alt="screenshot" src="images/addproduct.PNG">
 
 ---
 
 
 ## Built With
-Javascript, Node.js,MySQL, Inquirer
+Javascript, Node.js, MySQL, Inquirer
 ---
 
 ## Author
