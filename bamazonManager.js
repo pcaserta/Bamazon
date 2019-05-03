@@ -121,7 +121,7 @@ function addProduct() {
           },
           function(err) {
             if (err) throw err;
-            console.log("Your auction was created successfully!");
+            console.log("Your item was added successfully!");
             // re-prompt the user for if they want to bid or post
             connection.end();
           }
@@ -136,7 +136,7 @@ function addInventory() {
   // query the database for all products for sale
   connection.query("SELECT * FROM products", function (err, results) {
       if (err) throw err;
-      // once you have the items, prompt the user for which product they want to buy
+      // once you have the items, prompt the user for which product they want to add to
       inquirer
           .prompt([
               {
@@ -174,7 +174,7 @@ function addInventory() {
           
           }
       }
-      //check the stock to make sure we can fullfill the order
+      //update sql with the new stock value
          var amount = chosenItem.stock_quantity 
       
           connection.query(
@@ -188,7 +188,7 @@ function addInventory() {
                 }
               ],
               
-              //total the final order and let user know they succesfully bought item
+              //catch errors and let the user know they added inventory succesfully
               function(error) {
                 if (error) throw err;
                 console.log("\n---------------------------------------------------\n");
@@ -199,7 +199,7 @@ function addInventory() {
               }
             );
       
-      //lets the user know we are out of stock
+     
       
           });
   });
