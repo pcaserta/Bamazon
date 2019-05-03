@@ -37,7 +37,6 @@ function start() {
         .then(function (answer) {
             // based on their answer, either call the bid or the post functions
             if (answer.menuOptions === "View products for sale") {
-                console.log("ayy")
                 viewProducts();
             }else if (answer.menuOptions === "View low inventory") {
                 lowInventory();
@@ -193,7 +192,7 @@ function addInventory() {
                 if (error) throw err;
                 console.log("\n---------------------------------------------------\n");
               
-                console.log(chosenItem.product_name + " added succesfully");
+                console.log(chosenItem.product_name + "(" + answer.amount + ")" +" added succesfully");
                 console.log("\n---------------------------------------------------\n");
                 connection.end();
               }
