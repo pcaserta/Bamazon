@@ -20,10 +20,30 @@ This will start the app, and display the featured items for sale along with the 
 Bamazon manager is a node application that allows a manager to query specific data, add new products, and add inventory to already existing products in the database. First the user is proompted with 4 selections: * View Products for Sale, View Low Inventory, Add to Inventory, and Add New Product.View products for sale will show all the products currently listed in the database. View low inventory displays items with inventory less than 5. Add to inventory allows the user to add inventory to already existing products in the database. Add new product allows the user to add new products to the database.
 
 ---
-View Products
+View Products For Sale
  
 
-<img width="1230" alt="screenshot" src="images/spotify-this-song.PNG">
+<img width="1230" alt="screenshot" src="images/view_products.PNG">
+
+---
+
+View Low Inventory
+ 
+
+<img width="1230" alt="screenshot" src="images/low.PNG">
+
+---
+Add To Inventory
+ 
+
+<img width="1230" alt="screenshot" src="images/add_inventory.PNG">
+
+---
+
+Add New Products
+ 
+
+<img width="1230" alt="screenshot" src="images/add_product.PNG">
 
 ---
 
