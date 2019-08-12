@@ -1,6 +1,6 @@
-# Web-App
+# Bamazon
 
-Web-App is a functioning node application that allows the user to "purchase items" displayed by the app. It updates the mysql database in realtime. There is a also a mangager view which allows the user to view different statistics regarding the products.
+Bamazon is a functioning node application that allows the user to "purchase items" displayed by the app. It updates the mysql database in realtime. There is a also a mangager view which allows the user to view different statistics regarding the products.
 
 
 ---
